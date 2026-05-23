@@ -156,10 +156,10 @@ QString QsnBsFormWeeks(QString name, quint8 days, QString id)
     item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" autocomplete=\"off\" %2>%1</label>").arg(QObject::tr("FR"), (days & 0x10)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name="%3" data-unit="toggle-item" autocomplete="off" %2>%1</label>").arg(QObject::tr("SA"), (days & 0x20)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name='%3' data-unit='toggle-item' autocomplete='off' %2>%1</label>").arg(QObject::tr("SA"), (days & 0x20)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name="%3" data-unit="toggle-item" autocomplete="off" %2>%1</label>").arg(QObject::tr("SU"), (days & 0x40)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name='%3' data-unit='toggle-item' autocomplete='off' %2>%1</label>").arg(QObject::tr("SU"), (days & 0x40)?" checked":"", id);
 
     item += QString("</div></div></div>");
 

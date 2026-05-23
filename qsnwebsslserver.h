@@ -9,6 +9,8 @@
 #include <QDir>
 #include <QSslConfiguration>
 #include <QSslKey>
+#include <QSslCipher>
+#include <QSslDiffieHellmanParameters>
 #include "qsnwebsocketssl.h"
 #include "qsnwebcontainer.h"
 

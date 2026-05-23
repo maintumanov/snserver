@@ -23,12 +23,12 @@ void QsnWebWidgetCardThermostatControl::getContents(QStringList *contents, int )
     *contents << QString("<li class=\"list-group-item d-flex %2\" data-unit=\"thrmcon-%1\" >").arg(itemID()).arg((isActual?" active":""));
     *contents << QsnBsIconNum(numIcon, getLink());
     *contents << QString("<p class=\"specs\">%1</p>").arg(getLabel());
-    *contents << QString("<div class=\"ml-auto d-flex pb-2 mt-1\">");
-    *contents << QString("<button class=\"ml-auto btn btn-outline-primary btn-mk mr-1 \" "
+    *contents << QString("<div class=\"ms-auto d-flex pb-2 mt-1\">");
+    *contents << QString("<button class=\"ms-auto btn btn-outline-primary btn-mk me-1 \" "
                          "data-unit=\"thrmcon-%1btn\" onclick=\"sendState('action', '%1', 'inc')\" "
                          "type=\"button\"%2>+</button>").arg(itemID()).arg((isActual?"":" disabled"));
     *contents << QString("<h6 class=\"badge my-auto %3 \" id=\"thrmcon-%1\">%2</h6>").arg(itemID()).arg(getTextState(), getIndState());
-    *contents << QString("<button class=\"btn btn-outline-primary btn-mk ml-1\" "
+    *contents << QString("<button class=\"btn btn-outline-primary btn-mk ms-1\" "
                          "data-unit=\"thrmcon-%1btn\" onclick=\"sendState('action', '%1', 'dec')\" "
                          "type=\"button\"%2>-</button>").arg(itemID()).arg((isActual?"":" disabled"));
     *contents << QString("</div></li>");

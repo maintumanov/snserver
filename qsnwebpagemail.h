@@ -14,7 +14,7 @@
  * @brief Web widget for sending email notifications based on system log events.
  *
  * This class integrates with the global service bus to receive log/alert messages,
- * queues them per user (based on permissions), and sends HTML-formatted emails
+ * queues them per user (based on permissions), and sends HTms-formatted emails
  * via SMTP (with optional SSL/TLS support).
  *
  * It provides a web UI for manual testing and status monitoring.

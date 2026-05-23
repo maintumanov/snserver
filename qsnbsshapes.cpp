@@ -96,7 +96,7 @@ QString QsnBsFormCheckbox(QString name, bool checked, QString id)
     return QString("<div class=\"form-group row\">"
                    "<label for=\"%3\" class=\"col-6 col-sm-3 col-xl-2 col-form-label\">%1</label>"
                    "<div class=\"col-6 col-sm-9 col-xl-10\">"
-                   "<input type=\"checkbox\" class=\"float-right float-sm-left form-control\" id=\"%3\" %2>"
+                   "<input type=\"checkbox\" class=\"float-end float-sm-left form-control\" id=\"%3\" %2>"
                    "</div></div>").arg(name, checked?"checked":"", id);
 }
 
@@ -105,7 +105,7 @@ QString QsnBsFormRadio(QString name, QString group, bool checked, QString id)
     return QString("<div class=\"form-group row\">"
                    "<label for=\"%3\" class=\"col-6 col-sm-3 col-xl-2 col-form-label\">%1</label>"
                    "<div class=\"col-6 col-sm-9 col-xl-10\">"
-                   "<input type=\"radio\" name=\"%4\" class=\"float-right float-sm-left form-control\" id=\"%3\" %2>"
+                   "<input type=\"radio\" name=\"%4\" class=\"float-end float-sm-left form-control\" id=\"%3\" %2>"
                    "</div></div>").arg(name, checked?"checked":"", id, group);
 }
 
@@ -114,7 +114,7 @@ QString QsnBsFormSwitch(QString name, bool checked, QString id)
     return QString("<div class=\"form-group row\">"
                    "<label for=\"%3\" class=\"col-6 col-sm-3 col-xl-2 col-form-label\">%1</label>"
                    "<div class=\"col-6 col-sm-9 col-xl-10\">"
-                   "<input type=\"checkbox\" class=\"form-control float-right float-sm-left form-control-switch\" id=\"%3\" %2>"
+                   "<input type=\"checkbox\" class=\"form-control float-end float-sm-left form-control-switch\" id=\"%3\" %2>"
                    "</div></div>").arg(name, checked?"checked":"", id);
 }
 
@@ -125,7 +125,7 @@ QString QsnBsFormButton(QString name, QString id, QString type)
     item += QString("<label for=\"%2\" class=\"col-12 col-sm-3 col-xl-2 col-form-label\"></label>").arg(id);
     item += QString("<div class=\"col-12 col-sm-9\">");
     item += QString("<button id=\"%2\" type=\"button\" "
-                    "class=\"btn %3 d-lg-inline-block ml-auto \">"
+                    "class=\"btn %3 d-lg-inline-block ms-auto \">"
                     "%1</button>").arg(name, id, type);
     item += QString("</div></div>");
     return item;
@@ -138,28 +138,28 @@ QString QsnBsFormWeeks(QString name, quint8 days, QString id)
     item += QString("<div class=\"form-group row\">");
     item += QString("<label class=\"col-6 col-sm-3 col-xl-2 col-form-label\">%1</label>").arg(name);
     item += QString("<div class=\"col-12 col-sm-9 col-lg-5 col-xl-4\">");
-    item += QString("<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">");
+    item += QString("<div class=\"btn-group btn-group-toggle\" data-bs-toggle=\"buttons\">");
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"1\" %2>%1</label>").arg(QObject::tr("MO"), (days & 0x01)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"1\" %2>%1</label>").arg(QObject::tr("MO"), (days & 0x01)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"2\" %2>%1</label>").arg(QObject::tr("TU"), (days & 0x02)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"2\" %2>%1</label>").arg(QObject::tr("TU"), (days & 0x02)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"4\" %2>%1</label>").arg(QObject::tr("WE"), (days & 0x04)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"4\" %2>%1</label>").arg(QObject::tr("WE"), (days & 0x04)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"8\" %2>%1</label>").arg(QObject::tr("TH"), (days & 0x08)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"8\" %2>%1</label>").arg(QObject::tr("TH"), (days & 0x08)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"16\" %2>%1</label>").arg(QObject::tr("FR"), (days & 0x10)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"16\" %2>%1</label>").arg(QObject::tr("FR"), (days & 0x10)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"32\" %2>%1</label>").arg(QObject::tr("SA"), (days & 0x20)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"32\" %2>%1</label>").arg(QObject::tr("SA"), (days & 0x20)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-toggle=\"64\" %2>%1</label>").arg(QObject::tr("SU"), (days & 0x40)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"64\" %2>%1</label>").arg(QObject::tr("SU"), (days & 0x40)?" checked":"", id);
 
     item += QString("</div></div></div>");
 
@@ -198,14 +198,14 @@ QString QsnBsFormGroupButtonBegin()
 QString QsnBsFormGroupButton(QString name, QString id, QString type)
 {
     return QString("<button id=\"%2\" type=\"button\" "
-                   "class=\"btn %3 mr-1 mb-1 \">"
+                   "class=\"btn %3 me-1 mb-1 \">"
                    "%1</button>").arg(name, id, type);
 }
 
 QString QsnBsFormGroupButtonLink(QString name, QString id, QString link, QString type)
 {
     return QString("<button id=\"%2\" type=\"button\" "
-                   "class=\"btn %3 mr-1 mb-1\" onclick=\"%4\">"
+                   "class=\"btn %3 me-1 mb-1\" onclick=\"%4\">"
                    "%1</button>").arg(name, id, type, link);
 }
 
@@ -261,7 +261,7 @@ QString QsnBsPanelCardBegin(quint32 id, QString title)
     item += QString("<div class=\"col-sm-12 col-md-6 col-xl-4 px-1 px-sm-2\">");
     item += QString("<div class=\"card my-1 my-sm-3\" data-unit-group=\"panel-%1\">").arg(id);
     item += QString("<div class=\"card-body\">");
-    item += QString("<h4 class=\"card-title ml-2\">%1</h4>").arg(title);
+    item += QString("<h4 class=\"card-title ms-2\">%1</h4>").arg(title);
     item += QString("</div>");
     return item;
 }
@@ -298,7 +298,7 @@ QString QsnBsPanelCardItemSwitchEnd(quint8 integated)
 
 QString QsnBsPanelCardItemSwitchSwitch(quint32 id, bool checked)
 {
-    return QString("<label class=\"switch_m ml-auto %1\">"
+    return QString("<label class=\"switch_m ms-auto %1\">"
                    "<input type=\"checkbox\" id=\"switch-%2\" %1>"
                    "<span></span></label>").arg(checked?"checked":"").arg(id);
 }
@@ -349,7 +349,7 @@ QString QsnBsPanelCardItemLabelEnd(quint8 integated, QString link)
 
 QString QsnBsPanelCardItemLabelBadge(quint32 id, QString value)
 {
-    return QString("<h6 class=\"ml-auto text-primary\" id=\"label-%1\">%2</h6>").arg(id).arg(value);
+    return QString("<h6 class=\"ms-auto text-primary\" id=\"label-%1\">%2</h6>").arg(id).arg(value);
 }
 
 QString QsnBsPanelCardItemLabelFunJSON(quint32 id)
@@ -425,7 +425,7 @@ QString QsnBsTapsBegin()
 QString QsnBsTapsTabAdd(QString id, QString name, bool active)
 {
     return QString("<li class=\"nav-item\">"
-                   "<a class=\"nav-link %1\" data-toggle=\"tab\" "
+                   "<a class=\"nav-link %1\" data-bs-toggle=\"tab\" "
                    "href=\"#%2\" role=\"tab\">%3</a></li>").arg((active==true?"active":" "), id, name);
 }
 
@@ -633,7 +633,7 @@ QString QsnBsPanelTitleButton(QString title, QString name, QString id, QString t
     ret += QString("<div class=\"row px-0 px-sm-1\">");
     ret += QString("<h3 class=\"px-0 col-12 col-sm-8\">%1</h3>").arg(title);
     ret += QString("<button id=\"%2\" type=\"button\" "
-                   "class=\"px-sm-0 col-12 col-sm-3 btn btn-info ml-sm-auto %3\" onclick=\"window.location.href='%4';\">"
+                   "class=\"px-sm-0 col-12 col-sm-3 btn btn-info ms-sm-auto %3\" onclick=\"window.location.href='%4';\">"
                    "%1</button>").arg(name, id, type, link);
 
     ret += QString("</div></div>");
@@ -643,7 +643,7 @@ QString QsnBsPanelTitleButton(QString title, QString name, QString id, QString t
 QString QsnBsButton(QString name, QString id, QString type)
 {
     return QString("<button id=\"%2\" type=\"button\" "
-                   "class=\"btn %3 d-lg-inline-block ml-auto \">"
+                   "class=\"btn %3 d-lg-inline-block ms-auto \">"
                    "%1</button>").arg(name, id, type);
 }
 

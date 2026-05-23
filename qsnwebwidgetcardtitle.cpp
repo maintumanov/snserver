@@ -9,7 +9,7 @@ QsnWebWidgetCardTitle::QsnWebWidgetCardTitle(quint32 iID, QsnGlobalModules *modu
 
 void QsnWebWidgetCardTitle::getContents(QStringList *contents, int )
 {
-    *contents << QString("<div class=\"card-body ml-2\">"
+    *contents << QString("<div class=\"card-body ms-2\">"
                          "<h5 class=\"card-title\">%1</h5>"
                          "</div>").arg(objectName());
 }

@@ -65,7 +65,7 @@ void QsnWebPageOwnTracks::getFunctions(QStringList *functions, int , QString )
                           "var tid = '\"' + item.tid + '\"'; "
                           "var ih = \"\"; "
                           "if (item.ih == \"in\") ih = \" class='success'\";"
-                          "if (item.tid != \"-\") bt = \"<td class='td-actions text-right p-0 pr-2 align-middle'>"
+                          "if (item.tid != \"-\") bt = \"<td class='td-actions text-right p-0 pe-2 align-middle'>"
                           "<button type='button' class='btn btn-secondary btn-ms p-0' "
                           "onclick='downloadGPX(\" + tid + \");'>GPX</button></td>\";"
                           "table.append(\"<tr\" + ih + \"><td>\" + item.name + \"</td>\" +"
@@ -92,7 +92,7 @@ void QsnWebPageOwnTracks::getContents(QStringList *contents, int )
     *contents << QsnBsFormTableTheadAdd(tr("Distance"), QString());
     *contents << QsnBsFormTableTheadAddMD(tr("Area"));
     *contents << QsnBsFormTableTheadAddMD(tr("Time"), QString());
-    *contents << QString("<th class=\"text-right p-1 pr-2 align-middle col-1\" ></th>");
+    *contents << QString("<th class=\"text-right p-1 pe-2 align-middle col-1\" ></th>");
     *contents << QsnBsFormTableTheadEnd();
     *contents << QsnBsFormTableBodyBegin("userstable");
 
@@ -108,7 +108,7 @@ void QsnWebPageOwnTracks::getContents(QStringList *contents, int )
                 *contents << QsnBsFormTableBodyRowCustomCellMD(areaLabel(l->distance_area));
                 *contents << QsnBsFormTableBodyRowCustomCellMD(QDateTime::fromMSecsSinceEpoch(l->tst.toLongLong() * 1000).toString("dd.MM.yy hh:mm:ss"));
                 if (l->fsize > 0 && isEnableRec(l->tid)) {
-                    *contents << QString("<td class=\"td-actions text-right p-0 pr-2 align-middle\">");
+                    *contents << QString("<td class=\"td-actions text-right p-0 pe-2 align-middle\">");
                     *contents << QString("<button type=\"button\" class=\"btn btn-secondary btn-ms p-0\""
                                          "onclick=\"onclick=downloadGPX(\\\\\"%1\\\\\");\">").arg(l->tid);
                     *contents << QString("GPX</button></td>");

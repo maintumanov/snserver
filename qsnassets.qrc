@@ -10,5 +10,6 @@
         <file>assets/css/apexcharts.css</file>
         <file>assets/js/apexcharts.min.js</file>
         <file>assets/images/icons-sprite.svg</file>
+        <file>assets/css/bootstrap.min.css</file>
     </qresource>
 </RCC>

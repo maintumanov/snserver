@@ -80,8 +80,8 @@ void QsnWebPageLog::getContents(QStringList *contents, int )
                 *contents << QsnBsFormTableTheadBegin();
                 *contents << QsnBsFormTableTheadAdd(tr("Time"), "12rem");
                 *contents << QsnBsFormTableTheadAdd(tr("Message"));
-                *contents << QString("<th class=\"text-right p-1 pr-2 align-middle col-1\" >");
-                *contents << QString("<button id=\"%1\" type=\"button\" class=\"btn btn-danger btn-sm p-0 ml-auto\" >").arg("logclear");
+                *contents << QString("<th class=\"text-right p-1 pe-2 align-middle col-1\" >");
+                *contents << QString("<button id=\"%1\" type=\"button\" class=\"btn btn-danger btn-sm p-0 ms-auto\" >").arg("logclear");
                 *contents << QString("<svg class=\"icon-sprite icon-05x \"><use xlink:href=\"assets/images/icons-sprite.svg#subicon-delete\" /></svg>");
                 *contents << QString("</button>");
                 *contents << QString("</th>");

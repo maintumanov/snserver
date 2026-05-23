@@ -34,7 +34,7 @@ void QsnWebWidgetCardSwitch::getContents(QStringList *contents, int )
     *contents << QString("<li class=\"list-group-item d-flex %2\" data-unit=\"switch-%1\" >").arg(itemID()).arg((switchState?" active":""));
     *contents << QsnBsIconNum(numIcon, getLink());
     *contents << QString("<p class=\"specs\">%1</p>").arg(textLabel());
-    *contents << QString("<label class=\"switch_m ml-auto %1\">"
+    *contents << QString("<label class=\"switch_m ms-auto %1\">"
                          "<input type=\"checkbox\" id=\"switch-%2\" %1>"
                          "<span></span></label>").arg(switchState?"checked":"").arg(itemID());
     *contents << QString("</li>");

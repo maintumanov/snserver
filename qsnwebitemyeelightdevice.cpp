@@ -38,7 +38,7 @@ void QsnWebItemYeelightDevice::fromStream(QDataStream *stream)
     mds->io->loadIOFromStream(stream, this);
     rmOn = optionsMap.value("RMON", QByteArray()).toByteArray();
     rmOff = optionsMap.value("RMOFF", QByteArray()).toByteArray();
-    rmSwitch = optionsMap.value("HCSW", QByteArray()).toByteArray();
+    rmSwitch = optionsMap.value("RMSW", QByteArray()).toByteArray();
 
     *stream >> count; //items
     for (int i = 0; i < count; i ++) {

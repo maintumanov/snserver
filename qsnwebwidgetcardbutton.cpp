@@ -20,7 +20,7 @@ void QsnWebWidgetCardButton::getContents(QStringList *contents, int )
     *contents << QString("<li class=\"list-group-item d-flex active\" data-unit=\"button-%1\" >").arg(itemID());
     *contents << QsnBsIconNum(numIcon);
     *contents << QString("<p class=\"specs\">%1</p>").arg(objectName());
-    *contents << QString("<div class=\"d-grid mt-1 ml-auto\">"
+    *contents << QString("<div class=\"d-grid mt-1 ms-auto\">"
                          "<button id=\"button-%1\" class=\"btn btn-secondary btn-mk\" type=\"button\">%2</button>"
                          "</div></li>").arg(itemID()).arg(btnname);
     *contents << QString("</li>");

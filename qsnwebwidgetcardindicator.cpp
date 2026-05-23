@@ -67,7 +67,7 @@ void QsnWebWidgetCardIndicator::getContents(QStringList *contents, int )
     *contents << QString("<li class=\"list-group-item d-flex  px-2%2\" data-unit=\"label-%1\">").arg(itemID()).arg((isActive?" active":""));
     *contents << QsnBsIconNum(QSNAutoIcon(iconNum, currentType), getLink());
     *contents << QString("<p class=\"specs\">%1</p>").arg(widgetAlias.isEmpty() ? objectName() : widgetAlias);
-    *contents << QString("<h6 class=\"ml-auto text-primary%3\" id=\"label-%1\">%2</h6>").arg(itemID()).arg(labelString, wr);
+    *contents << QString("<h6 class=\"ms-auto text-primary%3\" id=\"label-%1\">%2</h6>").arg(itemID()).arg(labelString, wr);
     *contents << QString("</li>");
 }
 

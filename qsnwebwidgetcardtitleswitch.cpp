@@ -23,9 +23,9 @@ void QsnWebWidgetCardTitleSwitch::getItemJSON(QStringList *jsonItems)
 void QsnWebWidgetCardTitleSwitch::getContents(QStringList *contents, int )
 {  
     bool state = widgetData.toString().contains("true");
-    *contents << QString("<div class=\"d-flex mr-2 ml-2 mb-3\">"
+    *contents << QString("<div class=\"d-flex me-2 ms-2 mb-3\">"
                          "<h5 class=\"card-title\">%1</h5>"
-                         "<label class=\"switch_m ml-auto\"><input type=\"checkbox\""
+                         "<label class=\"switch_m ms-auto\"><input type=\"checkbox\""
                          "id=\"switch-%3\" %2><span></span></label>"
                          "</div>").arg(objectName(), state?"checked":"").arg(itemID());
 

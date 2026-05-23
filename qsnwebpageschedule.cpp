@@ -43,10 +43,10 @@ void QsnWebPageSchedule::getFunctions(QStringList *functions, int , QString)
                           "$('#nameedit').addClass(\"is-invalid\");"
                           "return; } else $('#nameedit').removeClass(\"is-invalid\");"
                           "var days = 0;"
-                          "$.each($(\"input[name='weekedit']:checked\"), function() {days += Number($(this).attr('data-toggle'));});"
+                          "$.each($(\"input[name='weekedit']:checked\"), function() {days += Number($(this).attr('data-bs-toggle'));});"
                           "var actions = \"\";"
                           "$.each($(\"input[name='action']:checked\"), function() {"
-                          "actions += ($(this).attr('data-toggle') + ';'); });"
+                          "actions += ($(this).attr('data-bs-toggle') + ';'); });"
                           "console.log(actions);"
                           "console.log(days);"
                           " $.ajax({"
@@ -88,7 +88,7 @@ void QsnWebPageSchedule::getFunctions(QStringList *functions, int , QString)
                           "\"<td>\" + item.date + \"</td>\" +"
                           "\"<td>\" + item.events + \"</td>\" +"
                           "\"<td class='d-none d-md-table-cell' scope='col' >\" + item.lastrun + \"</td>\" +"
-                          "\"<td class='td-actions text-right p-0 pr-2 align-middle' >"
+                          "\"<td class='td-actions text-right p-0 pe-2 align-middle' >"
                           "<button type='button' class='btn btn-secondary btn-ms p-0' "
                           "onclick='window.location.href=\" + lnk + \";'>"
                           "<svg class='icon-sprite icon-05x'>"
@@ -162,8 +162,8 @@ void QsnWebPageSchedule::getContents(QStringList *contents, int )
         *contents << QsnBsFormTableBodyBegin("tableactions");
         for (int i = 0; i < mds->io->actions.count(); i ++) {
             *contents << QString("<tr class=\"noeven\">"
-                                 "<td width=1% class=\"py-0 pr-0 \"><input type=\"checkbox\" name=\"action\" class=\"form-control\""
-                                 "data-toggle=\"%3\" %2></td>"
+                                 "<td width=1% class=\"py-0 pe-0 \"><input type=\"checkbox\" name=\"action\" class=\"form-control\""
+                                 "data-bs-toggle=\"%3\" %2></td>"
                                  "<td>%1</td></tr>")
                          .arg(getActionTitle(i), isContains(eventItem.actions, i)?" checked":"").arg(i);
         }
@@ -185,7 +185,7 @@ void QsnWebPageSchedule::getContents(QStringList *contents, int )
     *contents << QsnBsFormTableTheadAdd(tr("Date/Days"));
     *contents << QsnBsFormTableTheadAdd(tr("Actions"), QString());
     *contents << QsnBsFormTableTheadAddMD(tr("Run"));
-    *contents << QString("<th class=\"text-right p-1 pr-2 align-middle col-1\" >");
+    *contents << QString("<th class=\"text-right p-1 pe-2 align-middle col-1\" >");
     *contents << QString("<button type=\"button\" class=\"btn btn-primary btn-sm p-0\" "
                          "onclick=\"window.location.href='%1?event=-1';\">").arg(widgetUrl);
     *contents << QString("<svg class=\"icon-sprite icon-05x \"><use xlink:href=\"assets/images/icons-sprite.svg#subicon-add\" /></svg>");
@@ -200,7 +200,7 @@ void QsnWebPageSchedule::getContents(QStringList *contents, int )
         *contents << QsnBsFormTableBodyRowCustomCell(events[i].isdate?events[i].date.toString("dd.MM.yyyy"):QSNDaysWeekToLine(events[i].daysweek));
         *contents << QsnBsFormTableBodyRowCustomCell(cardLabel(&events[i]));
         *contents << QsnBsFormTableBodyRowCustomCellMD((events[i].lastRun == QDateTime())?tr("It did not start"):tr("last") + ": " + events[i].lastRun.toString("dd.MM.yyyy hh:mm:ss"));
-        *contents << QString("<td class=\"td-actions text-right p-0 pr-2 align-middle\">");
+        *contents << QString("<td class=\"td-actions text-right p-0 pe-2 align-middle\">");
         *contents << QString("<button type=\"button\" class=\"btn btn-secondary btn-ms p-0\""
                              "onclick=\"window.location.href='%1?event=%2';\">").arg(widgetUrl).arg(i);
         *contents << QString("<svg class=\"icon-sprite icon-05x\">"

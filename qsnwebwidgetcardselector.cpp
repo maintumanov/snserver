@@ -28,7 +28,7 @@ void QsnWebWidgetCardSelector::getContents(QStringList *contents, int )
                          "data-unit=\"selector-%1\">").arg(itemID()).arg(" active");
     *contents << QsnBsIconNum(numIcon);
     *contents << QString("<p class=\"specs\">%1</p>").arg(objectName());
-    *contents << QString("<div class=\"ml-auto mt-1\">"
+    *contents << QString("<div class=\"ms-auto mt-1\">"
                          "<select id=\"selector-%1\" class=\"select_m inline-card\" "
                          "style=\"min-width: 6.5rem;\">").arg(itemID());
     for (int i = 0; i < items.count(); i ++)

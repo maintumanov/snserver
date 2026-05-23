@@ -80,7 +80,7 @@ void QsnWebPageSNIRF::getFunctions(QStringList *functions, int /*accountIndex*/,
                           "\"<td>\" + item.batt + \"</td>\" +"
                           "\"<td  class='d-none d-md-table-cell' scope='col' >\" + item.data + \"</td>\" +"
                           "\"<td  scope='col' >\" + item.date + \"</td>"
-//                          "<td class='td-actions text-right p-0 pr-2 align-middle'>"
+//                          "<td class='td-actions text-right p-0 pe-2 align-middle'>"
 //                          "<button type='button' class='btn btn-danger btn-ms p-0' "
 //                          "onclick='sendState(`remove`, `%1`, `\" + item.log + \"`);'"
 //                          "><svg class='icon-sprite icon-05x '><use xlink:href='assets/images/icons-sprite.svg#subicon-delete' /></svg>"
@@ -206,7 +206,7 @@ void QsnWebPageSNIRF::getContents(QStringList *contents, int /*accountIndex*/)
     *contents << QsnBsFormTableTheadAdd(tr("Batt"), QString());
     *contents << QsnBsFormTableTheadAddMD(tr("Data"));
     *contents << QsnBsFormTableTheadAdd(tr("Time"), QString());
-//    *contents << QString("<th class=\"text-right p-1 pr-2 align-middle col-1\" ></th>");
+//    *contents << QString("<th class=\"text-right p-1 pe-2 align-middle col-1\" ></th>");
     *contents << QsnBsFormTableTheadEnd();
     *contents << QsnBsFormTableBodyBegin("devicestable");
 
@@ -233,7 +233,7 @@ void QsnWebPageSNIRF::getContents(QStringList *contents, int /*accountIndex*/)
         *contents << QsnBsFormTableBodyRowCustomCellMD(devices[i].lastTimeUpdate.toString("dd.MM.yy hh:mm:ss"));
 
         // Delete button
-//        *contents << QString("<td class=\"td-actions text-right p-0 pr-2 align-middle\" >");
+//        *contents << QString("<td class=\"td-actions text-right p-0 pe-2 align-middle\" >");
 //        *contents << QString("<button type=\"button\" class=\"btn btn-danger btn-ms p-0\" "
 //                             "onclick=\"sendState('remove', '%1', '%2');\">").arg(itemID()).arg(devices[i].address);
 //        *contents << QString("<svg class=\"icon-sprite icon-05x \"><use xlink:href=\"assets/images/icons-sprite.svg#subicon-delete\" /></svg>");

@@ -743,48 +743,48 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
                             "</div></div></div>");
 
     // Модальное окно оповещения==============================================================
-//    // -- Alerts Modal --
-//    *htextStream << QString("<div class=\"modal modal-nobg centered fade\" id=\"alertsModal\" tabindex=\"-1\" role=\"dialog\" aria-label=\"Alerts\" aria-hidden=\"true\">");
-//    *htextStream << QString("<div class=\"modal-dialog\" role=\"document\">");
-//    *htextStream << QString("<div class=\"modal-content\">");
-//    *htextStream << QString("<div class=\"modal-body\">");
-//    // -- Alerts Modal - message begin --
-//    *htextStream << QString("<div class=\"alert alert-danger alert-dismissible fade show border-0\" role=\"alert\">");
-//    *htextStream << QString("<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">");
-//    *htextStream << QString("<span aria-hidden=\"true\">&times;</span>");
-//    *htextStream << QString("</button> Security SW update available");
-//    *htextStream << QString("</div>");
-//    // -- Alerts Modal - message end --
-//    *htextStream << QString("</div></div></div>");
-//    *htextStream << QString("<button type=\"button\" class=\"close close-modal\" data-dismiss=\"modal\" aria-label=\"Close\">");
-//    *htextStream << QString("<span aria-hidden=\"true\">&times;</span>");
-//    *htextStream << QString("</button></div>");
+    //    // -- Alerts Modal --
+    //    *htextStream << QString("<div class=\"modal modal-nobg centered fade\" id=\"alertsModal\" tabindex=\"-1\" role=\"dialog\" aria-label=\"Alerts\" aria-hidden=\"true\">");
+    //    *htextStream << QString("<div class=\"modal-dialog\" role=\"document\">");
+    //    *htextStream << QString("<div class=\"modal-content\">");
+    //    *htextStream << QString("<div class=\"modal-body\">");
+    //    // -- Alerts Modal - message begin --
+    //    *htextStream << QString("<div class=\"alert alert-danger alert-dismissible fade show border-0\" role=\"alert\">");
+    //    *htextStream << QString("<button type=\"button\" class=\"close\" data-bs-dismiss=\"alert\" aria-label=\"Close\">");
+    //    *htextStream << QString("<span aria-hidden=\"true\">&times;</span>");
+    //    *htextStream << QString("</button> Security SW update available");
+    //    *htextStream << QString("</div>");
+    //    // -- Alerts Modal - message end --
+    //    *htextStream << QString("</div></div></div>");
+    //    *htextStream << QString("<button type=\"button\" class=\"close close-modal\" data-bs-dismiss=\"modal\" aria-label=\"Close\">");
+    //    *htextStream << QString("<span aria-hidden=\"true\">&times;</span>");
+    //    *htextStream << QString("</button></div>");
 
     // -- Arming Modal --
-//    *htextStream << QString("<div class=\"modal modal-warning centered fade\" id=\"armModal\" tabindex=\"-1\" role=\"dialog\" aria-label=\"Arming\" aria-hidden=\"true\">");
+    //    *htextStream << QString("<div class=\"modal modal-warning centered fade\" id=\"armModal\" tabindex=\"-1\" role=\"dialog\" aria-label=\"Arming\" aria-hidden=\"true\">");
 
-//    *htextStream << QString("<div class=\"modal-dialog modal-sm\" role=\"document\">");
-//    *htextStream << QString("<div class=\"modal-content\">"
-//                            "<div class=\"modal-body\">"
-//                            "<div id=\"armTimer\">");
-//    *htextStream << QString("<h3 class=\"font-weight-bold\">EXIT NOW! <span class=\"timer font-weight-normal\"></span></h3>");
-//    *htextStream << QString("</div></div></div></div>");
-//    *htextStream << QString("<button type=\"button\" class=\"close close-modal\" data-dismiss=\"modal\" aria-label=\"Close\">");
-//    *htextStream << QString("<span aria-hidden=\"true\">&times;</span>");
-//    *htextStream << QString("</button></div>");
+    //    *htextStream << QString("<div class=\"modal-dialog modal-sm\" role=\"document\">");
+    //    *htextStream << QString("<div class=\"modal-content\">"
+    //                            "<div class=\"modal-body\">"
+    //                            "<div id=\"armTimer\">");
+    //    *htextStream << QString("<h3 class=\"font-weight-bold\">EXIT NOW! <span class=\"timer font-weight-normal\"></span></h3>");
+    //    *htextStream << QString("</div></div></div></div>");
+    //    *htextStream << QString("<button type=\"button\" class=\"close close-modal\" data-bs-dismiss=\"modal\" aria-label=\"Close\">");
+    //    *htextStream << QString("<span aria-hidden=\"true\">&times;</span>");
+    //    *htextStream << QString("</button></div>");
 
 
     // -- Alarm Modal --
-//    *htextStream << QString("<div class=\"modal modal-danger centered fade\" id=\"alarmModal\" tabindex=\"-1\" "
-//                            "role=\"dialog\" aria-label=\"ALARM\" aria-hidden=\"true\" data-backdrop=\"static\">");
-//    *htextStream << QString("<div class=\"modal-dialog\" role=\"document\">"
-//                            "<div class=\"modal-content\" data-dismiss=\"modal\">"
-//                            "<div class=\"modal-body d-flex\">");
-//    *htextStream << QString("<svg class=\"icon-sprite icon-2x icon-pulse\"><use xlink:href=\"assets/images/icons-sprite.svg#alarm\"/></svg>");
-//    *htextStream << QString("<h3 class=\"text-right font-weight-bold ml-auto align-self-center\">MOTION DETECTED!</h3>");
-//    *htextStream << QString("</div></div>");
-//    *htextStream << QString("<p class=\"mt-2 text-center text-danger\">Click the red area to accept/close message</p>");
-//    *htextStream << QString("</div></div>");
+    //    *htextStream << QString("<div class=\"modal modal-danger centered fade\" id=\"alarmModal\" tabindex=\"-1\" "
+    //                            "role=\"dialog\" aria-label=\"ALARM\" aria-hidden=\"true\" data-backdrop=\"static\">");
+    //    *htextStream << QString("<div class=\"modal-dialog\" role=\"document\">"
+    //                            "<div class=\"modal-content\" data-bs-dismiss=\"modal\">"
+    //                            "<div class=\"modal-body d-flex\">");
+    //    *htextStream << QString("<svg class=\"icon-sprite icon-2x icon-pulse\"><use xlink:href=\"assets/images/icons-sprite.svg#alarm\"/></svg>");
+    //    *htextStream << QString("<h3 class=\"text-right font-weight-bold ms-auto align-self-center\">MOTION DETECTED!</h3>");
+    //    *htextStream << QString("</div></div>");
+    //    *htextStream << QString("<p class=\"mt-2 text-center text-danger\">Click the red area to accept/close message</p>");
+    //    *htextStream << QString("</div></div>");
 
     //-- Wrapper START --
     *htextStream << QString("<div id=\"wrapper\" class=\"hidden\">");
@@ -802,22 +802,22 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
                             "</svg>");
     *htextStream << QString("<input id=\"minifier\" type=\"checkbox\"></label>");
     *htextStream << QString("<div class=\"info-holder info-rb\">");
-    *htextStream << QString("<div data-toggle=\"popover-all\" data-content=\"Checkbox element using localStorage to remember the last status.\" data-original-title=\"Side menu narrowing\" data-placement=\"right\"></div>");
+    *htextStream << QString("<div data-bs-toggle=\"popover-all\" data-content=\"Checkbox element using localStorage to remember the last status.\" data-original-title=\"Side menu narrowing\" data-placement=\"right\"></div>");
     *htextStream << QString("</div></div></form></div>");
 
-    *htextStream << QString("<a class=\"navbar-brand px-lg-3 px-1 mr-0\" id=\"brand\" href=\"/\">%1</a>").arg(objectName());
-    *htextStream << QString("<div class=\"ml-auto\">"
+    *htextStream << QString("<a class=\"navbar-brand px-lg-3 px-1 me-0\" id=\"brand\" href=\"/\">%1</a>").arg(objectName());
+    *htextStream << QString("<div class=\"ms-auto\">"
                             "<div class=\"navbar-nav flex-row navbar-icons\">");
     //Пиктограмма оповещения на панели==============================================
-//    *htextStream << QString("<div class=\"nav-item\">");
-//    *htextStream << QString("<button id=\"alerts-toggler\" class=\"btn btn-link nav-link\" title=\"Alerts\" type=\"button\" data-alerts=\"1\" "); //data-alerts количество сообщений
-//    *htextStream << QString("data-toggle=\"modal\" data-target=\"#alertsModal\">");
-//    *htextStream << QString("<svg class=\"icon-sprite\"><use xlink:href=\"assets/images/icons-sprite.svg#alert\"/>");
-//    *htextStream << QString("<svg class=\"text-danger\"><use class=\"icon-dot\" xlink:href=\"assets/images/icons-sprite.svg#icon-dot\"/></svg>");
-//    *htextStream << QString("</svg></button></div>");
+    //    *htextStream << QString("<div class=\"nav-item\">");
+    //    *htextStream << QString("<button id=\"alerts-toggler\" class=\"btn btn-link nav-link\" title=\"Alerts\" type=\"button\" data-alerts=\"1\" "); //data-alerts количество сообщений
+    //    *htextStream << QString("data-bs-toggle=\"modal\" data-bs-target=\"#alertsModal\">");
+    //    *htextStream << QString("<svg class=\"icon-sprite\"><use xlink:href=\"assets/images/icons-sprite.svg#alert\"/>");
+    //    *htextStream << QString("<svg class=\"text-danger\"><use class=\"icon-dot\" xlink:href=\"assets/images/icons-sprite.svg#icon-dot\"/></svg>");
+    //    *htextStream << QString("</svg></button></div>");
 
     *htextStream << QString("<div id=\"user-menu\" class=\"nav-item dropdown\">");
-    *htextStream << QString("<button class=\"btn btn-link nav-link dropdown-toggle\" title=\"User\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
+    *htextStream << QString("<button class=\"btn btn-link nav-link dropdown-toggle\" title=\"User\" type=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
     *htextStream << QString("<svg class=\"icon-sprite\"><use xlink:href=\"assets/images/icons-sprite.svg#user\"/></svg></button>");
     *htextStream << QString("<div class=\"dropdown-menu dropdown-menu-right\">");
 
@@ -830,7 +830,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
     *htextStream << QString("<a class=\"dropdown-item\" href=\"\" id=\"logout\">%1</a>").arg(tr("Logout"));
     *htextStream << QString("</div></div>");
     *htextStream << QString("<div class=\"nav-item d-lg-none\">"
-                            "<button id=\"sidebar-toggler\" type=\"button\" class=\"btn btn-link nav-link\" data-toggle=\"offcanvas\">");
+                            "<button id=\"sidebar-toggler\" type=\"button\" class=\"btn btn-link nav-link\" data-bs-toggle=\"offcanvas\">");
     *htextStream << QString("<svg class=\"icon-sprite\"><use xlink:href=\"assets/images/icons-sprite.svg#menu\"/></svg>");
     *htextStream << QString("</button></div></div></div></nav>");
 
@@ -845,7 +845,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
                             "<ul class=\"nav flex-column nav-sidebar\">");
     //-- Side menu - home menu item
 
-   // *htextStream << QsnBsNavItem(tr("Home"), "home", "/", pageURL == QLatin1String("/"));// Исправить на название страницы
+    // *htextStream << QsnBsNavItem(tr("Home"), "home", "/", pageURL == QLatin1String("/"));// Исправить на название страницы
     //-- Side menu - next menu item
     bool isCurrentAdd = false;
     for(int i = 0; i < widgets.count(); i ++)
@@ -890,7 +890,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
 
     *htextStream << QString("</div></div>");
     //-- Main content overlay when side menu appears  --
-    *htextStream << QString("<div class=\"cover-offcanvas\" data-toggle=\"offcanvas\"></div></div></div></div></div>");
+    *htextStream << QString("<div class=\"cover-offcanvas\" data-bs-toggle=\"offcanvas\"></div></div></div></div></div>");
     //-- Wrapper END --
     //-- FAB button - bottom right on large screens --
     //    *htextStream << QString("<button id=\"info-toggler\" type=\"button\" class=\"btn btn-primary btn-fab btn-fixed-br d-none d-lg-inline-block\">");
@@ -901,6 +901,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
 
     //-- Bootstrap bundle --
     *htextStream << QString("<script src=\"assets/js/bootstrap.bundle.min.js\"></script>");
+    *htextStream << QString("<link rel=\"stylesheet\" href=\"assets/css/bootstrap.min.css\">");
 
     //-- Cross browser support for SVG icon sprites --
     *htextStream << QString("<script src=\"assets/js/svg4everybody.min.js\"></script>");
@@ -1024,7 +1025,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
                             "checkboxValue = this.checked;"
                             "localStorage.setItem('minifier', checkboxValue);}});");
     // Side menu toogler for medium and small screens
-    *htextStream << QString("$('[data-toggle=\"offcanvas\"]').click(function() {"
+    *htextStream << QString("$('[data-bs-toggle=\"offcanvas\"]').click(function() {"
                             "$('.row-offcanvas').toggleClass('active');});");
 
     // Switch (checkbox element) toogler
@@ -1042,21 +1043,21 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
                             "$('#alerts-toggler').attr('data-alerts', sum);"
                             "if (sum === 0) {"
                             "$('#alertsModal').modal('hide');"
-                            "$('#alerts-toggler').attr('data-toggle', 'none');}});");
+                            "$('#alerts-toggler').attr('data-bs-toggle', 'none');}});");
     // Show/hide tips (popovers) - FAB button (right bottom on large screens)
     *htextStream << QString("$('#info-toggler').click(function() {"
                             "if ($('body').hasClass('info-active')) {"
-                            "$('[data-toggle=\"popover-all\"]').popover('hide');"
+                            "$('[data-bs-toggle=\"popover-all\"]').popover('hide');"
                             "$('body').removeClass('info-active');");
     *htextStream << QString("} else {"
-                            "$('[data-toggle=\"popover-all\"]').popover('show');"
+                            "$('[data-bs-toggle=\"popover-all\"]').popover('show');"
                             "$('body').addClass('info-active');"
                             "}});");
 
     // Hide tips (popovers) by clicking outside
     *htextStream << QString("$('body').on('click', function(pop) {"
                             "if (pop.target.id !== 'info-toggler' && $('body').hasClass('info-active')) {"
-                            "$('[data-toggle=\"popover-all\"]').popover('hide');"
+                            "$('[data-bs-toggle=\"popover-all\"]').popover('hide');"
                             "$('body').removeClass('info-active');"
                             "}});");
 
@@ -1268,6 +1269,34 @@ void QsnWebContainer::loadSettings()
 void QsnWebContainer::checkSupportSSL()
 {
     modules.supportSSL = QSslSocket::supportsSsl();
+    // Логирование информации о SSL поддержке для диагностики
+    if (modules.supportSSL) {
+        QString sslVersion = QSslSocket::sslLibraryVersionString();
+        emit snBUSOutput(QSNLogToContainer(
+                             BUSSERV_LOG_LEVEL_information,
+                             QString(tr("SSL поддержка включена. Версия библиотеки: %1")).arg(sslVersion),
+                             BUSSERV_LOG_CATEGORY_core,
+                             QString("server"),
+                             false), this);
+
+        // Проверка доступных протоколов
+        QList<QSsl::SslProtocol> supportedProtocols;
+        supportedProtocols << QSsl::TlsV1_2 << QSsl::TlsV1_3 << QSsl::TlsV1_2OrLater;
+
+        emit snBUSOutput(QSNLogToContainer(
+                             BUSSERV_LOG_LEVEL_information,
+                             tr("Настроен безопасный TLS: минимальная версия TLS 1.2"),
+                             BUSSERV_LOG_CATEGORY_core,
+                             QString("server"),
+                             false), this);
+    } else {
+        emit snBUSOutput(QSNLogToContainer(
+                             BUSSERV_LOG_LEVEL_caution,
+                             tr("SSL поддержка недоступна. SSL сервер не будет работать."),
+                             BUSSERV_LOG_CATEGORY_core,
+                             QString("server"),
+                             false), this);
+    }
 }
 
 void QsnWebContainer::saveSettings()

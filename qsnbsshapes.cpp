@@ -425,8 +425,8 @@ QString QsnBsTapsBegin()
 QString QsnBsTapsTabAdd(QString id, QString name, bool active)
 {
     return QString("<li class=\"nav-item\">"
-                   "<a class=\"nav-link %1\" data-bs-toggle=\"tab\" data-bs-target=\"#%2\" "
-                   "href=\"#%2\" role=\"tab\">%3</a></li>").arg((active==true?"active":" "), id, name);
+                   "<a class=\"nav-link %1\" data-bs-toggle=\"tab\" href=\"#%2\" "
+                   "role=\"tab\">%3</a></li>").arg((active==true?"active":""), id, name);
 }
 
 QString QsnBsTapsPanesBegin()
@@ -436,7 +436,7 @@ QString QsnBsTapsPanesBegin()
 
 QString QsnBsTapsPanelBegin(QString id, bool active)
 {
-    return QString("<div class=\"tab-pane fade show %1\" id=\"%2\" role=\"tabpanel\"><form>").arg((active==true?"active":" "), id);
+    return QString("<div class=\"tab-pane fade %1\" id=\"%2\" role=\"tabpanel\"><form>").arg((active==true?"show active":""), id);
 }
 
 QString QsnBsTapsPanelEnd()

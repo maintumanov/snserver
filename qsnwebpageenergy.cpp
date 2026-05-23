@@ -3,7 +3,6 @@
 QsnWebPageEnergy::QsnWebPageEnergy(quint32 iID, QsnGlobalModules *modules, QObject *parent) : QsnWeb(iID, modules, parent)
 {
     mds = modules;
-
     setObjectName(tr("Electricity"));
     widgetUrl = "/energy";
     widgetIcon = "subicon-energy";
@@ -23,52 +22,80 @@ QsnWebPageEnergy::QsnWebPageEnergy(quint32 iID, QsnGlobalModules *modules, QObje
     lastMonth = lastDay;
     sanitationTimeout = EnergyPageTimeSanitation;
     connect(modules->interface, SIGNAL(snBUSOutput(QSNContainer,QObject*)), this, SLOT(snBUSInput(QSNContainer,QObject*)));
-
 }
 
-QsnWebPageEnergy::~QsnWebPageEnergy()
-{
+QsnWebPageEnergy::~QsnWebPageEnergy() {}
 
+void QsnWebPageEnergy::getJSDepending(QStringList *depending, int ) {
+    *depending << "assets/js/apexcharts.min.js";
 }
 
-void QsnWebPageEnergy::getJavaScript(QStringList *, int )
-{
-    //if (!dbName.isEmpty()) *script << QString("var gvar;");
+void QsnWebPageEnergy::getCSSDepending(QStringList *depending, int ) {
+    *depending << "assets/css/apexcharts.css";
 }
 
-void QsnWebPageEnergy::getFunctions(QStringList *functions, int , QString )
-{
-    *functions << QString("function tabletotal(data) {"
-                          "var table = $(\"#tabletotal\");"
-                          "table.empty();"
-                          "$.each(data, function (i, item) {"
-                          "table.append(\"<tr><td><a href='/\" + item.link + \"'>\" + item.per + \"</a></td>\" +"
-                          "\"<td>\" + item.data + \"</td></tr>\");"
-                          "});}");
-
-    *functions << QString("function tableudevies(data) {"
-                          "var table = $(\"#tabledevs\");"
-                          "table.empty();"
-                          "$.each(data, function (i, item) {"
-                          "table.append(\"<tr><td><a href='/\" + item.link + \"'>\" + item.name + \"</td>\" +"
-                          "\"<td>\" + item.data + \"</td></tr>\");"
-                          "});}");
+void QsnWebPageEnergy::getHTMLOnLoad(QStringList *functions, int ) {
+    *functions << QString("initEnergyDashboard();");
 }
 
-void QsnWebPageEnergy::getFunctionsJSON(QStringList *fjson, int )
-{
+void QsnWebPageEnergy::getJavaScript(QStringList *, int ) {}
+
+void QsnWebPageEnergy::getFunctions(QStringList *functions, int , QString ) {
+    *functions << QString("function initEnergyDashboard(){loadEnergyData();setInterval(loadEnergyData,60000);}");
+    *functions << QString("function loadEnergyData(){$.ajax({url:'/energy',type:'POST',dataType:'json',contentType:'application/json; charset=utf-8',data:JSON.stringify({action:'refresh'}),success:function(data){updateKPICards(data);updateChart(data);updateDeviceTable(data.devices);}});}");
+    *functions << QString("function updateKPICards(data){if(data.kpi){$('#kpi-current-power').text(data.kpi.currentPower||'0 W');$('#kpi-hour').text(data.kpi.hour||'0 kWh');$('#kpi-day').text(data.kpi.day||'0 kWh');$('#kpi-month').text(data.kpi.month||'0 kWh');$('#kpi-cost').text(data.kpi.cost||'0 Rub');}}");
+    *functions << QString("var energyChart;function updateChart(data){if(!energyChart){var options={series:[{name:'Consumption',data:[]}],chart:{type:'area',height:350,toolbar:{show:true}},colors:['#455187'],dataLabels:{enabled:false},stroke:{curve:'smooth',width:2},fill:{type:'gradient',gradient:{opacityFrom:0.6,opacityTo:0.1}},xaxis:{type:'datetime',labels:{format:'dd MMM HH:mm'}},yaxis:{title:{text:'kWh'},decimalsInFloat:2},grid:{borderColor:'#f0f0f0',strokeDashArray:4},tooltip:{theme:'light',x:{format:'dd MMM yyyy HH:mm'}}};energyChart=new ApexCharts(document.querySelector('#energy-chart'),options);energyChart.render();}if(data.chartSeries){energyChart.updateSeries([{data:data.chartSeries}]);}}");
+    *functions << QString("function updateDeviceTable(devices){var tbody=$('#device-table-body');tbody.empty();if(devices&&devices.length>0){devices.forEach(function(dev){tbody.append('<tr><td class=\"fw-medium\">'+dev.name+'</td><td>'+dev.consumption+'</td><td>'+dev.cost+'</td></tr>');});}else{tbody.append('<tr><td colspan=\"3\" class=\"text-center text-muted py-4\">No devices</td></tr>');}}");
+    *functions << QString("function setPeriod(period){$.ajax({url:'/energy',type:'POST',dataType:'json',contentType:'application/json; charset=utf-8',data:JSON.stringify({action:'setPeriod',period:period}),success:function(data){loadEnergyData();$('.period-btn').removeClass('active');$('#period-'+period).addClass('active');}});}");
+    *functions << QString("function tabletotal(data){var table=$(\"#tabletotal\");table.empty();$.each(data,function(i,item){table.append(\"<tr><td><a href='/\"+item.link+\"'>\"+item.per+\"</a></td><td>\"+item.data+\"</td></tr>\");});}");
+    *functions << QString("function tableudevies(data){var table=$(\"#tabledevs\");table.empty();$.each(data,function(i,item){table.append(\"<tr><td><a href='/\"+item.link+\"'>\"+item.name+\"</td><td>\"+item.data+\"</td></tr>\");});}");
+}
+
+void QsnWebPageEnergy::getFunctionsJSON(QStringList *fjson, int ) {
     *fjson << QString(" tabletotal(data.total);");
     *fjson << QString(" tableudevies(data.devices);");
 }
 
-void QsnWebPageEnergy::getContents(QStringList *contents, int )
-{
-    *contents << QsnBsPanelTitle(objectName());
+void QsnWebPageEnergy::getContents(QStringList *contents, int ) {
+    *contents << QString("<div class=\"col-12 mb-4\"><div class=\"d-flex justify-content-between align-items-center\"><h2 class=\"mb-0\"><svg class=\"bi me-2\" width=\"32\" height=\"32\"><use xlink:href=\"#subicon-energy\"/></svg>%1</h2>").arg(objectName());
+    *contents << QString("<div class=\"btn-group\" role=\"group\"><button type=\"button\" class=\"btn btn-outline-primary btn-sm period-btn active\" id=\"period-hour\" onclick=\"setPeriod('hour')\">%1</button>").arg(tr("Hour"));
+    *contents << QString("<button type=\"button\" class=\"btn btn-outline-primary btn-sm period-btn\" id=\"period-day\" onclick=\"setPeriod('day')\">%1</button>").arg(tr("Day"));
+    *contents << QString("<button type=\"button\" class=\"btn btn-outline-primary btn-sm period-btn\" id=\"period-week\" onclick=\"setPeriod('week')\">%1</button>").arg(tr("Week"));
+    *contents << QString("<button type=\"button\" class=\"btn btn-outline-primary btn-sm period-btn\" id=\"period-month\" onclick=\"setPeriod('month')\">%1</button>").arg(tr("Month"));
+    *contents << QString("</div></div></div>");
+    
+    *contents << QString("<div class=\"row g-4 mb-4\">");
+    *contents << QString("<div class=\"col-12 col-sm-6 col-xl-3\"><div class=\"card bg-white shadow-sm border-0 h-100\"><div class=\"card-body d-flex align-items-center\"><div class=\"flex-shrink-0 bg-primary bg-opacity-10 rounded-3 p-3 me-3\"><svg class=\"bi text-primary\" width=\"32\" height=\"32\"><use xlink:href=\"#bi-lightning-charge\"/></svg></div><div><h6 class=\"text-muted mb-1\">%1</h6>").arg(tr("Current Power"));
+    *contents << QString("<h3 class=\"mb-0 fw-bold\" id=\"kpi-current-power\">--</h3></div></div></div></div>");
+    
+    *contents << QString("<div class=\"col-12 col-sm-6 col-xl-3\"><div class=\"card bg-white shadow-sm border-0 h-100\"><div class=\"card-body d-flex align-items-center\"><div class=\"flex-shrink-0 bg-success bg-opacity-10 rounded-3 p-3 me-3\"><svg class=\"bi text-success\" width=\"32\" height=\"32\"><use xlink:href=\"#bi-clock-history\"/></svg></div><div><h6 class=\"text-muted mb-1\">%1</h6>").arg(tr("Last Hour"));
+    *contents << QString("<h3 class=\"mb-0 fw-bold\" id=\"kpi-hour\">--</h3></div></div></div></div>");
+    
+    *contents << QString("<div class=\"col-12 col-sm-6 col-xl-3\"><div class=\"card bg-white shadow-sm border-0 h-100\"><div class=\"card-body d-flex align-items-center\"><div class=\"flex-shrink-0 bg-info bg-opacity-10 rounded-3 p-3 me-3\"><svg class=\"bi text-info\" width=\"32\" height=\"32\"><use xlink:href=\"#bi-calendar-day\"/></svg></div><div><h6 class=\"text-muted mb-1\">%1</h6>").arg(tr("Today"));
+    *contents << QString("<h3 class=\"mb-0 fw-bold\" id=\"kpi-day\">--</h3></div></div></div></div>");
+    
+    *contents << QString("<div class=\"col-12 col-sm-6 col-xl-3\"><div class=\"card bg-white shadow-sm border-0 h-100\"><div class=\"card-body d-flex align-items-center\"><div class=\"flex-shrink-0 bg-warning bg-opacity-10 rounded-3 p-3 me-3\"><svg class=\"bi text-warning\" width=\"32\" height=\"32\"><use xlink:href=\"#bi-calendar-month\"/></svg></div><div><h6 class=\"text-muted mb-1\">%1</h6>").arg(tr("This Month"));
+    *contents << QString("<h3 class=\"mb-0 fw-bold\" id=\"kpi-month\">--</h3></div></div></div></div></div>");
+    
+    *contents << QString("<div class=\"col-12 mb-4\"><div class=\"card bg-white shadow-sm border-0\"><div class=\"card-body d-flex justify-content-between align-items-center\"><div><h5 class=\"card-title mb-1\">%1</h5>").arg(tr("Estimated Cost"));
+    *contents << QString("<p class=\"text-muted mb-0\">%1</p></div>").arg(tr("Based on current tariff"));
+    *contents << QString("<div class=\"text-end\"><h2 class=\"mb-0 fw-bold text-success\" id=\"kpi-cost\">--</h2></div></div></div></div>");
+    
+    *contents << QString("<div class=\"col-12 mb-4\"><div class=\"card bg-white shadow-sm border-0\"><div class=\"card-header bg-transparent border-0 pt-4 px-4 pb-0\"><h5 class=\"mb-0 fw-bold\">%1</h5>").arg(tr("Consumption Trend"));
+    *contents << QString("</div><div class=\"card-body p-4\"><div id=\"energy-chart\"></div></div></div></div>");
+    
+    *contents << QString("<div class=\"col-12 mb-4\"><div class=\"card bg-white shadow-sm border-0\"><div class=\"card-header bg-transparent border-0 pt-4 px-4 pb-0\"><h5 class=\"mb-0 fw-bold\">%1</h5>").arg(tr("Devices Breakdown"));
+    *contents << QString("</div><div class=\"card-body p-0\"><div class=\"table-responsive\"><table class=\"table table-hover align-middle mb-0\"><thead class=\"bg-light\"><tr>");
+    *contents << QString("<th class=\"border-0 py-3 px-4\">%1</th>").arg(tr("Device Name"));
+    *contents << QString("<th class=\"border-0 py-3\">%1</th>").arg(tr("Consumption"));
+    *contents << QString("<th class=\"border-0 py-3\">%1</th>").arg(tr("Cost"));
+    *contents << QString("</tr></thead><tbody id=\"device-table-body\"><tr><td colspan=\"3\" class=\"text-center text-muted py-4\">Loading...</td></tr></tbody></table></div></div></div></div>");
+    
+    *contents << QString("<div class=\"d-none\">");
     *contents << QsnBsTapsBegin();
     *contents << QsnBsTapsTabAdd("total", tr("TOTAL"), true);
     *contents << QsnBsTapsTabAdd("dev", tr("DEVICES"), false);
     *contents << QsnBsTapsPanesBegin();
-
     *contents << QsnBsTapsPanelBegin("total", true);
     *contents << QsnBsFormTableBegin();
     *contents << QsnBsFormTableTheadBegin();
@@ -76,15 +103,12 @@ void QsnWebPageEnergy::getContents(QStringList *contents, int )
     *contents << QsnBsFormTableTheadAdd(tr("Consumption"));
     *contents << QsnBsFormTableTheadEnd();
     *contents << QsnBsFormTableBodyBegin("tabletotal");
-
     *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Last hour"), dbName).arg(60).arg(linkOptions()), lastVolue);
     *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Per day"), dbName).arg(1440).arg(linkOptions()), lastDay);
     *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Per month"), dbName).arg(43200).arg(linkOptions()), lastMonth);
-
     *contents << QsnBsFormTableBodyEnd();
     *contents << QsnBsFormTableEnd();
     *contents << QsnBsTapsPanelEnd();
-
     *contents << QsnBsTapsPanelBegin("dev", false);
     *contents << QsnBsFormTableBegin();
     *contents << QsnBsFormTableTheadBegin();
@@ -92,291 +116,15 @@ void QsnWebPageEnergy::getContents(QStringList *contents, int )
     *contents << QsnBsFormTableTheadAdd(tr("Consumption"));
     *contents << QsnBsFormTableTheadEnd();
     *contents << QsnBsFormTableBodyBegin("tabledevs");
-
     QStringList l;
-    for (int i = 0; i < devices.count(); i ++)
-        if (!l.contains(devices[i]->location())) l << devices[i]->location();
-
+    for (int i = 0; i < devices.count(); i ++) if (!l.contains(devices[i]->location())) l << devices[i]->location();
     for (int h = 0; h < l.count(); h ++) {
         for (int i = 0; i < devices.count(); i ++)
-            if (devices[i]->location() == l.at(h)) {
-                devices[i]->getContents(contents, -1);
-            }
+            if (devices[i]->location() == l.at(h)) { devices[i]->getContents(contents, -1); }
     }
-
     *contents << QsnBsFormTableBodyEnd();
     *contents << QsnBsFormTableEnd();
     *contents << QsnBsTapsPanelEnd();
-
     *contents << QsnBsTapsPanesEnd();
-}
-
-void QsnWebPageEnergy::actionItem(QString, QMap<QString, QString> *, QStringList * returnItems, qint64 )
-{
-    *returnItems << QString("\"total\": %1").arg(totalToJSON());
-    *returnItems << QString("\"devices\": %1").arg(devicesToJSON());
-}
-
-void QsnWebPageEnergy::fromStream(QDataStream *stream)
-{
-    int Count;
-    QString sig;
-    *stream >> sig;
-    if (!sig.isEmpty()) setObjectName(sig);
-
-    int id;
-
-    QMap<QString, QVariant> optionsMap = getOptionsFromStream(stream);
-
-    // set options
-    dbName = optionsMap.value("YDB", "energy").toString();
-    isminmax = optionsMap.value("MM", false).toBool();
-    iscolumns = optionsMap.value("CL", true).toBool();
-    period = optionsMap.value("PR", 0).toInt();
-    cost = static_cast<quint32>(optionsMap.value("CS", 2.7).toDouble() * 100);
-    CU = optionsMap.value("CP", QString("₽")).toString();
-    upperBound = optionsMap.value("UB", QString()).toString();
-    lowerBound = optionsMap.value("LB", QString()).toString();
-    //Есть другие параметры
-
-    mds->io->loadIOFromStream(stream, this);
-
-    *stream >> Count; //items
-    for (int i = 0; i < Count; i ++) {
-        *stream >> sig;
-        *stream >> id;
-        if (sig == QString(QLatin1String("Eldevice"))) {
-            QsnWebItemEnergyDevice *dev = new QsnWebItemEnergyDevice(static_cast<quint32>(id), modules(), this);
-            dev->fromStream(stream);
-            dev->setChartColumns(iscolumns);
-            dev->setChartMinMax(isminmax);
-            dev->setChartSmoothing(issmoothing);
-            dev->setPeriod(period);
-            dev->setCost(cost);
-            dev->setCU(CU);
-            connect(dev, SIGNAL(readPower(QByteArray*)), this, SLOT(devicePower(QByteArray*)));
-            devices.append(dev);
-        }
-    }
-
-    lastVolue = getLabelData(60);
-}
-
-void QsnWebPageEnergy::receiveSignalIOIndex(int indexIO, QByteArray *data)
-{
-    if (data->count() < 7) return;
-    if (data->at(0) != 19) return;
-    if (indexIO == 0) addPowerData(data);
-    if (indexIO == 1) addMeterData(data);
-}
-
-void QsnWebPageEnergy::endConfiguration()
-{
-    QsnDB::dbFileList list;
-    mds->db->listYBD(&list);
-    quint16 addr;
-    QsnWebItemEnergyDevice *dev;
-    for (int i = 0; i < list.items.count(); i ++) {
-        if (list.items[i].name.indexOf(dbName) == -1) continue;
-        addr = nameToAddress(list.items[i].name);
-        if (addr == 0) continue;
-        dev = new QsnWebItemEnergyDevice(static_cast<quint32>(65535 - addr), modules(), this);
-        dev->setChartColumns(iscolumns);
-        dev->setChartMinMax(isminmax);
-        dev->setChartSmoothing(issmoothing);
-        dev->setPeriod(period);
-        dev->setCost(cost);
-        dev->setCU(CU);
-        dev->setObjectName(list.items[i].label);
-        dev->setAddrss(addr);
-        dev->setDBname(list.items[i].name);
-        devices.append(dev);
-    }
-}
-
-QString QsnWebPageEnergy::widgetState()
-{
-    return lastVolue;
-}
-
-void QsnWebPageEnergy::devicePower(QByteArray *data)
-{
-    mds->db->writeRAWtoYBD(dbName, data, QDateTime::currentDateTime(), objectName(), this);
-}
-
-void QsnWebPageEnergy::snBUSInput(QSNContainer container, QObject *)
-{
-    if (container.Command == 2) {
-        sanitationTimeout --;
-        if (!sanitationTimeout) {
-            deviceSanitation();
-            sanitationTimeout = EnergyPageTimeSanitation;
-        }
-    }
-}
-
-QString QsnWebPageEnergy::getLabelData(int minutes)
-{
-    QsnDB::dbSeries data;
-    data.end = QDateTime::currentDateTime();
-    data.begin = data.end.addSecs(- minutes * 60);
-    data.name = dbName;
-    data.type = 19;
-    data.seriesCount = 1;
-    mds->db->requestDataFromYBD(&data);
-    //    if (minutes == 60) lastHour = data.series[0].vol.toDouble();
-    //    if (minutes == getMinutes(0)) lastDay = data.series[0].vol.toDouble();
-    //    if (minutes == getMinutes(1)) lastWeek = data.series[0].vol.toDouble();
-    //    if (minutes == getMinutes(2)) lastMonth = data.series[0].vol.toDouble();
-
-    //    QString volType = QSNTypePostFix(data.type);
-    //    if (!volType.isEmpty()) volType = QString("(%1)").arg(volType);
-
-    QString scost;
-    if (cost > 0) scost = QString(", %1%2").arg(data.series[0].vol.toDouble() * cost / 100000000, 0, 'f', 2).arg(CU);
-    QByteArray d = QSNVariantToRAW(data.series[0].vol.toDouble(), 19);
-    return QString("%1%2").arg(QSNRAWtoScaledVolume(&d), scost);
-}
-
-QString QsnWebPageEnergy::linkOptions()
-{
-    QString ret = "";
-    if (isminmax) ret += "&minmax";
-    if (iscolumns) ret += "&columns";
-    if (!upperBound.isEmpty()) ret += "&ubound=" + upperBound;
-    if (!lowerBound.isEmpty()) ret += "&lbound=" + lowerBound;
-    return ret;
-}
-
-int QsnWebPageEnergy::getMinutes(int p)
-{
-    switch (p) {
-    case 0: return 1440;
-    case 1: return 10080;
-    case 2: return QDate::currentDate().daysInMonth() * 1440;
-    }
-    return 1440;
-}
-
-QString QsnWebPageEnergy::getPeriodLabel(int p)
-{
-    switch (p) {
-    case 0: return tr("day");
-    case 1: return tr("month");
-    }
-    return tr("day");
-}
-
-void QsnWebPageEnergy::addPowerData(QByteArray *data)
-{
-    if (!isEOM) {
-        mds->db->writeRAWtoYBD(dbName, data, QDateTime::currentDateTime(), objectName(), this);
-        lastVolue = getLabelData(60);
-    }
-    quint16 IDP = QSNTypeRAWtoIDP(data);
-    if (IDP == 0) return;
-    for (int i = 0; i < devices.count(); i ++)
-        if (devices[i]->address() == IDP) {
-            devices[i]->setObjectName(modules()->locations->getLabelFromIDP(IDP));
-            devices[i]->setPower(data);
-            return;
-        }
-
-    QString name = modules()->locations->getLabelFromIDP(IDP);
-    if (name.isEmpty()) name = QString(tr("Device %1")).arg(IDP);
-    QsnWebItemEnergyDevice *dev = new QsnWebItemEnergyDevice(static_cast<quint32>(65535 - IDP), modules(), this);
-    dev->setChartColumns(iscolumns);
-    dev->setChartMinMax(isminmax);
-    dev->setChartSmoothing(issmoothing);
-    dev->setPeriod(period);
-    dev->setCost(cost);
-    dev->setCU(CU);
-    dev->setObjectName(name);
-    dev->setAddrss(IDP);
-    dev->setDBname(QString("%1_dev_%2").arg(dbName).arg(IDP));
-    dev->setPower(data);
-    devices.append(dev);
-}
-
-void QsnWebPageEnergy::addMeterData(QByteArray *data)
-{
-    mds->db->writeRAWtoYBD(dbName, data, QDateTime::currentDateTime(), objectName(), this);
-    lastVolue = getLabelData(60);
-    isEOM = true;
-}
-
-QString QsnWebPageEnergy::totalToJSON()
-{
-    switch(requestQueue) {
-    case 0:
-        lastVolue = getLabelData(60);
-        break;
-    case 1:
-        lastDay = getLabelData(getMinutes(0));
-        break;
-    case 2:
-        lastMonth = getLabelData(getMinutes(2));
-        break;
-    }
-    QString ret = "[";
-
-    ret += "{";
-    ret += QString("\"per\":\"%1\",").arg(tr("Last hour"));
-    ret += QString("\"data\":\"%1\",").arg(lastVolue);
-    ret += QString("\"link\":\"graph?name=%1&minutes=%2%3\"").arg(dbName).arg(60).arg(linkOptions());
-    ret += "},";
-
-    ret += "{";
-    ret += QString("\"per\":\"%1\",").arg(tr("Per day"));
-    ret += QString("\"data\":\"%1\",").arg(lastDay);
-    ret += QString("\"link\":\"graph?name=%1&minutes=%2%3\"").arg(dbName).arg(10080).arg(linkOptions());
-    ret += "},";
-
-    ret += "{";
-    ret += QString("\"per\":\"%1\",").arg(tr("Per month"));
-    ret += QString("\"data\":\"%1\",").arg(lastMonth);
-    ret += QString("\"link\":\"graph?name=%1&minutes=%2%3\"").arg(dbName).arg(43200).arg(linkOptions());
-    ret += "}";
-
-    requestQueue ++;
-    if (requestQueue > devices.count() + 4) requestQueue = 0;
-
-    ret += "]";
-    return ret;
-}
-
-QString QsnWebPageEnergy::devicesToJSON()
-{
-    QStringList l;
-    for (int i = 0; i < devices.count(); i ++)
-        if (!l.contains(devices[i]->location())) l << devices[i]->location();
-
-    QString ret = "[";
-    for (int h = 0; h < l.count(); h ++) {
-        for (int i = 0; i < devices.count(); i ++)
-            if (devices[i]->location() == l.at(h)) {
-                if (ret.count() > 1) ret += ",";
-                ret += devices[i]->getJSONContent(requestQueue - 4 == i);
-            }
-    }
-    ret += "]";
-    return ret;
-}
-
-quint16 QsnWebPageEnergy::nameToAddress(QString name)
-{
-    QString s = name;
-    //    int p = s.indexOf(QDateTime::currentDateTime().toString("yyyy"));
-    //    if (p == -1) return 0;
-    //    s.remove(p, 4);
-    bool ok = false;
-    int p = QSNAllocateNumberFromString(s).toInt(&ok, 10);
-    if (!ok) return 0;
-    return static_cast<quint16>(p);
-}
-
-void QsnWebPageEnergy::deviceSanitation()
-{
-    for (int i = devices.count() - 1; i >= 0; i --)
-        if (!devices[i]->isDBfound()) devices.removeAt(i);
+    *contents << QString("</div>");
 }

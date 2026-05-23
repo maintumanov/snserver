@@ -43,7 +43,7 @@ void QsnWebWidgetCard::getDialogs(QStringList *dialogs, int accountIndex)
 
 void QsnWebWidgetCard::getContents(QStringList *contents, int accountIndex)
 {
-    *contents << QString("<div class=\"card pb-2 pt-2\" data-unit-group=\"card-%1\">")
+    *contents << QString("<div class=\"card h-100\" data-unit-group=\"card-%1\">")
                  .arg(titleWidget != Q_NULLPTR?titleWidget->itemID():itemID());
     if (titleWidget != Q_NULLPTR) {
        QString data;

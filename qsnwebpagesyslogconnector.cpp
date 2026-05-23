@@ -74,7 +74,7 @@ void QsnWebPageSyslogConnector::actionItem(QString , QMap<QString, QString> *opt
 
 void QsnWebPageSyslogConnector::getContents(QStringList *contents, int )
 {
-    *contents << QString("<div class=\"col-12 col-sm-10 offset-sm-1\">");
+    *contents << QString("<div class=\"col-12 col-sm-10 ms-sm-auto\">");
     *contents << QsnBsFormSwitch(tr("Enable"), connector_enable, "enable");
     *contents << QsnBsFormSwitch(tr("Debug mode"), connector_debug_enable, "debug");
     *contents << QsnBsFormLabel(tr("Syslog server IP address"), syslogserver_address.toString(), "ip");

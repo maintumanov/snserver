@@ -58,7 +58,7 @@ void QsnWebAdapterUDP::actionItem(QString , QMap<QString, QString> *options, QSt
 
 void QsnWebAdapterUDP::getContents(QStringList *contents, int )
 {
-    *contents << QString("<div class=\"col-12 col-sm-10 offset-sm-1\">");
+    *contents << QString("<div class=\"col-12 col-sm-10 ms-sm-auto\">");
     *contents << QsnBsFormLabel(tr("Connected"), QSNBoolToYesNo(udpClient->isConnected()), "udpcon");
     *contents << QsnBsFormLabel(tr("Server address"), udpClient->getAddress(), "udpsadr");
     *contents << QsnBsFormLabel(tr("Server port"), QString::number(udpClient->getServerPort()), "udpsport");

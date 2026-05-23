@@ -30,7 +30,7 @@ void QsnWebAdapterRing::actionItem(QString , QMap<QString, QString> *options, QS
 
 void QsnWebAdapterRing::getContents(QStringList *contents, int )
 {
-    *contents << QString("<div class=\"col-12 col-sm-10 offset-sm-1\">");
+    *contents << QString("<div class=\"col-12 col-sm-10 ms-sm-auto\">");
     *contents << QsnBsFormLabel(tr("Connected"), QSNBoolToYesNo(ring.isConnected()), "conn");
     *contents << QsnBsFormLabel(tr("Port name"), ring.getPortName(), "port");
     *contents << QsnBsFormLabel(tr("State"), lastError(ring.error()), "state");

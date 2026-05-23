@@ -37,7 +37,7 @@ void QsnWebAdapterCANv5::actionItem(QString , QMap<QString, QString> *options, Q
 
 void QsnWebAdapterCANv5::getContents(QStringList *contents, int )
 {
-    *contents << QString("<div class=\"col-12 col-sm-10 offset-sm-1\">");
+    *contents << QString("<div class=\"col-12 col-sm-10 ms-sm-auto\">");
     *contents << QsnBsFormLabel(tr("Connected"), QSNBoolToYesNo(CANv5.isConnected()), "conn");
     *contents << QsnBsFormLabel(tr("Port name"), CANv5.getPortName(), "port");
     *contents << QsnBsFormLabel(tr("State"), lastError(CANv5.error()), "state");

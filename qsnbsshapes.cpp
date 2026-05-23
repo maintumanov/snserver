@@ -436,7 +436,7 @@ QString QsnBsTapsPanesBegin()
 
 QString QsnBsTapsPanelBegin(QString id, bool active)
 {
-    return QString("<div class=\"tab-pane fade %1\" id=\"%2\" role=\"tabpanel\"><form>").arg((active==true?"show active":""), id);
+    return QString("<div class=\"tab-pane %1\" id=\"%2\" role=\"tabpanel\"><form>").arg((active==true?"show active":""), id);
 }
 
 QString QsnBsTapsPanelEnd()

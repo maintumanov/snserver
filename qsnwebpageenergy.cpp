@@ -128,3 +128,147 @@ void QsnWebPageEnergy::getContents(QStringList *contents, int ) {
     *contents << QsnBsTapsPanesEnd();
     *contents << QString("</div>");
 }
+
+QString QsnWebPageEnergy::linkOptions() {
+    return QString();
+}
+
+void QsnWebPageEnergy::fromStream(QDataStream *stream) {
+    QsnWeb::fromStream(stream);
+    *stream >> dbName >> cost >> CU;
+    *stream >> isminmax >> iscolumns >> issmoothing;
+    *stream >> maxColor >> minColor >> defaultColor;
+}
+
+void QsnWebPageEnergy::snBUSInput(QSNContainer container, QObject *) {
+    if (container.command == QSN_CMD_READ_INPUT || container.command == QSN_CMD_READ_OUTPUT) {
+        addPowerData(&container.data);
+    }
+}
+
+void QsnWebPageEnergy::devicePower(QByteArray *data) {
+    addPowerData(data);
+}
+
+QString QsnWebPageEnergy::widgetState() {
+    return lastValue;
+}
+
+void QsnWebPageEnergy::actionItem(QString URL, QMap<QString, QString> *options, QStringList *, qint64) {
+    if (options->contains("action")) {
+        QString action = options->value("action");
+        if (action == "refresh" || action == "setPeriod") {
+            // Handle AJAX requests
+        }
+    }
+}
+
+void QsnWebPageEnergy::receiveSignalIOIndex(int, QByteArray *) {
+    // Handle IO signals
+}
+
+void QsnWebPageEnergy::endConfiguration() {
+    // Finalize configuration
+}
+
+void QsnWebPageEnergy::urlChanged(int) {
+    // Handle URL changes
+}
+
+void QsnWebPageEnergy::addPowerData(QByteArray *data) {
+    if (!data || data->isEmpty()) return;
+    // Process power data
+    bool ok;
+    double value = QString(*data).toDouble(&ok);
+    if (ok) {
+        currentPower = QString::number(value, 'f', 2);
+        lastValue = formatEnergy(value / 1000.0);
+    }
+}
+
+void QsnWebPageEnergy::addMeterData(QByteArray *data) {
+    if (!data || data->isEmpty()) return;
+    // Process meter data
+}
+
+QString QsnWebPageEnergy::totalToJSON() {
+    return QString("{\"hour\":\"%1\",\"day\":\"%2\",\"month\":\"%3\"}")
+        .arg(lastValue).arg(lastDay).arg(lastMonth);
+}
+
+QString QsnWebPageEnergy::devicesToJSON() {
+    return QString("[]");
+}
+
+QString QsnWebPageEnergy::getChartSeries(QString, QDateTime, QDateTime, bool) {
+    return QString("[]");
+}
+
+QString QsnWebPageEnergy::getDeviceBreakdownJSON() {
+    return QString("[]");
+}
+
+QString QsnWebPageEnergy::getSummaryCardsJSON() {
+    return QString("{}");
+}
+
+void QsnWebPageEnergy::spanGraph(QsnDB::dbSeries *) {
+    // Span graph implementation
+}
+
+void QsnWebPageEnergy::getMaxMin(bool, QsnDB::dbSeries *, qreal *, qreal *, bool) {
+    // Get max/min implementation
+}
+
+QString QsnWebPageEnergy::getLabelData(int) {
+    return QString();
+}
+
+QString QsnWebPageEnergy::getLabelDataWithCost(int) {
+    return QString();
+}
+
+int QsnWebPageEnergy::getMinutes(const QString &periodName) {
+    if (periodName == "hour") return 60;
+    if (periodName == "day") return 1440;
+    if (periodName == "week") return 10080;
+    if (periodName == "month") return 43200;
+    if (periodName == "year") return 525600;
+    return 60;
+}
+
+QString QsnWebPageEnergy::getPeriodLabel(const QString &periodName) {
+    if (periodName == "hour") return tr("Last Hour");
+    if (periodName == "day") return tr("Today");
+    if (periodName == "week") return tr("This Week");
+    if (periodName == "month") return tr("This Month");
+    if (periodName == "year") return tr("This Year");
+    return periodName;
+}
+
+quint16 QsnWebPageEnergy::nameToAddress(QString) {
+    return 0;
+}
+
+void QsnWebPageEnergy::deviceSanitation() {
+    // Device sanitation logic
+}
+
+QString QsnWebPageEnergy::formatPower(double watts) {
+    if (watts >= 1000.0) {
+        return QString::number(watts / 1000.0, 'f', 2) + " kW";
+    }
+    return QString::number(watts, 'f', 1) + " W";
+}
+
+QString QsnWebPageEnergy::formatEnergy(double kwh) {
+    return QString::number(kwh, 'f', 3) + " kWh";
+}
+
+QString QsnWebPageEnergy::formatCost(double amount) {
+    return QString::number(amount, 'f', 2) + " " + CU;
+}
+
+QString QsnWebPageEnergy::getCurrentPowerFromData() {
+    return currentPower;
+}

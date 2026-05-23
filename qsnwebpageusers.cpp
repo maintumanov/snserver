@@ -110,7 +110,7 @@ void QsnWebPageUsers::getContents(QStringList *contents, int accountIndex)
         *contents << QString("<th class=\"d-none d-md-table-cell\" scope=\"col\">%1</th>").arg(tr("Last access"));
         *contents << QString("<th class=\"d-none d-md-table-cell\" scope=\"col\">%1</th>").arg(tr("Last denied"));
 
-        *contents << QString("<th class=\"text-right p-1 pe-2 align-middle col-1\" >");
+        *contents << QString("<th class=\"text-end p-1 pe-2 align-middle col-1\" >");
         *contents << QString("<button type=\"button\" class=\"btn btn-primary btn-sm p-0\" "
                              "onclick=\"window.location.href='%1?AID=-1';\">").arg(widgetUrl);
         *contents << QString("<svg class=\"icon-sprite icon-05x \"><use xlink:href=\"assets/images/icons-sprite.svg#subicon-add\" /></svg>");
@@ -129,7 +129,7 @@ void QsnWebPageUsers::getContents(QStringList *contents, int accountIndex)
             *contents << QString("<td>%1</td>").arg(aitem->name);
             *contents << QString("<td class=\"d-none d-md-table-cell\">%1</td>").arg(QSNDateTimeToString(aitem->lastAccessAllowed));
             *contents << QString("<td class=\"d-none d-md-table-cell\">%1</td>").arg(QSNDateTimeToString(aitem->lastAccessDenied));
-            *contents << QString("<td class=\"td-actions text-right p-0 pe-2 align-middle\">");
+            *contents << QString("<td class=\"td-actions text-end p-0 pe-2 align-middle\">");
             *contents << QString("<button type=\"button\" class=\"btn btn-secondary btn-ms p-0\""
                                  "onclick=\"window.location.href='%1?AID=%2';\">").arg(widgetUrl).arg(aitem->ID);
             *contents << QString("<svg class=\"icon-sprite icon-05x\">"

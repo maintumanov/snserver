@@ -73,9 +73,9 @@ QString QsnBsFormTextArea(QString name, QString value, QString id)
 
 QString QsnBsFormCheckboxL(QString name, bool checked, QString id)
 {
-    return QString("<div class=\"form-group row\">"
-                   "<input type=\"checkbox\" class=\"custom-checkbox\" id=\"%3\" %2>"
-                   "<label class=\"col-12 col-sm-3 col-xl-2 col-form-label\" for=\"%3\">%1</label>"
+    return QString("<div class=\"form-check\">"
+                   "<input type=\"checkbox\" class=\"form-check-input\" id=\"%3\" %2>"
+                   "<label class=\"form-check-label\" for=\"%3\">%1</label>"
                    "</div>").arg(name, checked?"checked":"", id);
 }
 
@@ -138,7 +138,7 @@ QString QsnBsFormWeeks(QString name, quint8 days, QString id)
     item += QString("<div class=\"form-group row\">");
     item += QString("<label class=\"col-6 col-sm-3 col-xl-2 col-form-label\">%1</label>").arg(name);
     item += QString("<div class=\"col-12 col-sm-9 col-lg-5 col-xl-4\">");
-    item += QString("<div class=\"btn-group btn-group-toggle\" data-bs-toggle=\"buttons\">");
+    item += QString("<div class=\"btn-group\" role=\"group\" data-bs-toggle=\"buttons\">");
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
     item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"1\" %2>%1</label>").arg(QObject::tr("MO"), (days & 0x01)?" checked":"", id);
@@ -191,7 +191,7 @@ QString QsnBsFormGroupButtonBegin()
     QString item;
     item += QString("<div class=\"form-group row\">");
     item += QString("<label  class=\"col-12 col-sm-3 col-xl-2 col-form-label\"></label>");
-    item += QString("<div class=\"col-12 col-sm-9 text-right text-sm-left\">");
+    item += QString("<div class=\"col-12 col-sm-9 text-end text-sm-start\">");
     return item;
 }
 
@@ -579,7 +579,7 @@ QString QsnBsAlertBegin(QString level)
     QString alert;
     alert += QString("<div class=\"alert alert-");
     if (level.isEmpty()) alert += "primary"; else alert += level;
-    alert += QString(" col-12 offset-0 col-sm-10 offset-sm-1\" role=\"alert\">");
+    alert += QString(" col-12 col-sm-10 ms-sm-auto\" role=\"alert\">");
     return alert;
 }
 
@@ -597,7 +597,7 @@ QString QsnBsAlertEnd()
 QString QsnBsPageTitle(QString text)
 {
     QString ret;
-    ret = QString("<div class=\"col-12 col-sm-11 offset-sm-1 pb-3 pt-0\">");
+    ret = QString("<div class=\"col-12 col-sm-11 ms-sm-auto pb-3 pt-0\">");
     ret += QString("<h3>%1</h3>").arg(text);
     ret += QString("</div>");
     return ret;

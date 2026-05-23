@@ -819,7 +819,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
     *htextStream << QString("<div id=\"user-menu\" class=\"nav-item dropdown\">");
     *htextStream << QString("<button class=\"btn btn-link nav-link dropdown-toggle\" title=\"User\" type=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">");
     *htextStream << QString("<svg class=\"icon-sprite\"><use xlink:href=\"assets/images/icons-sprite.svg#user\"/></svg></button>");
-    *htextStream << QString("<div class=\"dropdown-menu dropdown-menu-right\">");
+    *htextStream << QString("<div class=\"dropdown-menu dropdown-menu-end\">");
 
     if (accountIndex > -1 && accountIndex < 65535) {
         *htextStream << QString("<a class=\"dropdown-item\" href=\"users?AID=%2\">%1</a>").arg(tr("Profile")).arg(modules.auth->accountUIDfromIndex(accountIndex));
@@ -879,7 +879,7 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
     //-- Side menu END --
     //-- Main content START --
     *htextStream << QString("<div id=\"main\">");
-    if (w->widgetColPage)  *htextStream << QString("<div class=\"container\"><div class=\"card-columns\">");
+    if (w->widgetColPage)  *htextStream << QString("<div class=\"container\"><div class=\"row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4\">");
     else *htextStream << QString("<div class=\"container-fluid\"><div class=\"row\">");
     //-- this content --
 
@@ -1135,7 +1135,7 @@ void QsnWebContainer::getAuthorizationHtml(QString , QByteArray *content)
     *htextStream << QString("<label class=\"form-check-label\" for=\"remember\">%1</label>").arg(tr("Remember"));
     *htextStream << QString("</div><div class=\"form-group row\">");
     *htextStream << QString("<div class=\"col-12 mt-3 mb-2 text-center\">");
-    *htextStream << QString("<button id=\"btnlogin\" type=\"button\" class=\"btn btn-primary btn-block\" "
+    *htextStream << QString("<button id=\"btnlogin\" type=\"button\" class=\"btn btn-primary w-100\" "
                             ">%1</button >").arg(tr("Enter"));
     *htextStream << QString("</div></div></form></div></div></div></div>");
 

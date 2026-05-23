@@ -1,5 +1,11 @@
 ```
 *.o
 *.obj
+*.exe
+*.dll
+*.so
+*.a
 *.out
+build/
+dist/
 ```

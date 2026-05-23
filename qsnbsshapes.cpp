@@ -425,9 +425,9 @@ QString QsnBsTapsBegin()
 QString QsnBsTapsTabAdd(QString id, QString name, bool active)
 {
     return QString("<li class=\"nav-item\">"
-                   "<a class=\"nav-link %1\" href=\"#%2\" data-bs-toggle=\"tab\" "
-                   "role=\"tab\" aria-selected=\"%3\">%4</a></li>")
-            .arg((active==true?"active":""), id, (active==true?"true":"false"), name);
+                   "<a class=\"nav-link %1\" href=\"#%3\" data-bs-toggle=\"tab\" "
+                   "role=\"tab\" aria-selected=\"%4\">%5</a></li>")
+            .arg((active==true?"active":""), id, id, (active==true?"true":"false"), name);
 }
 
 QString QsnBsTapsPanesBegin()

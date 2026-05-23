@@ -138,28 +138,28 @@ QString QsnBsFormWeeks(QString name, quint8 days, QString id)
     item += QString("<div class=\"form-group row\">");
     item += QString("<label class=\"col-6 col-sm-3 col-xl-2 col-form-label\">%1</label>").arg(name);
     item += QString("<div class=\"col-12 col-sm-9 col-lg-5 col-xl-4\">");
-    item += QString("<div class=\"btn-group\" role=\"group\" data-bs-toggle=\"buttons\">");
+    item += QString("<div class=\"btn-group\" role=\"group\">");
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"1\" %2>%1</label>").arg(QObject::tr("MO"), (days & 0x01)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" autocomplete=\"off\" %2>%1</label>").arg(QObject::tr("MO"), (days & 0x01)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"2\" %2>%1</label>").arg(QObject::tr("TU"), (days & 0x02)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" autocomplete=\"off\" %2>%1</label>").arg(QObject::tr("TU"), (days & 0x02)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"4\" %2>%1</label>").arg(QObject::tr("WE"), (days & 0x04)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" autocomplete=\"off\" %2>%1</label>").arg(QObject::tr("WE"), (days & 0x04)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"8\" %2>%1</label>").arg(QObject::tr("TH"), (days & 0x08)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" autocomplete=\"off\" %2>%1</label>").arg(QObject::tr("TH"), (days & 0x08)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"16\" %2>%1</label>").arg(QObject::tr("FR"), (days & 0x10)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" autocomplete=\"off\" %2>%1</label>").arg(QObject::tr("FR"), (days & 0x10)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"32\" %2>%1</label>").arg(QObject::tr("SA"), (days & 0x20)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name="%3" data-unit="toggle-item" autocomplete="off" %2>%1</label>").arg(QObject::tr("SA"), (days & 0x20)?" checked":"", id);
 
     item += QString("<label class=\"btn btn-label btn-sm px-2 py-2 py-2\">");
-    item += QString("<input type=\"checkbox\" name=\"%3\" data-unit=\"toggle-item\" data-bs-toggle=\"64\" %2>%1</label>").arg(QObject::tr("SU"), (days & 0x40)?" checked":"", id);
+    item += QString("<input type=\"checkbox\" name="%3" data-unit="toggle-item" autocomplete="off" %2>%1</label>").arg(QObject::tr("SU"), (days & 0x40)?" checked":"", id);
 
     item += QString("</div></div></div>");
 
@@ -425,7 +425,7 @@ QString QsnBsTapsBegin()
 QString QsnBsTapsTabAdd(QString id, QString name, bool active)
 {
     return QString("<li class=\"nav-item\">"
-                   "<a class=\"nav-link %1\" data-bs-toggle=\"tab\" "
+                   "<a class=\"nav-link %1\" data-bs-toggle=\"tab\" data-bs-target=\"#%2\" "
                    "href=\"#%2\" role=\"tab\">%3</a></li>").arg((active==true?"active":" "), id, name);
 }
 

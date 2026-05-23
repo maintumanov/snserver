@@ -900,8 +900,8 @@ void QsnWebContainer::getHtml(QString url, QByteArray *content, int accountIndex
     *htextStream << QString("<script src=\"assets/js/jquery-3.4.1.min.js\"></script>");
 
     //-- Bootstrap bundle --
-    *htextStream << QString("<script src=\"assets/js/bootstrap.bundle.min.js\"></script>");
     *htextStream << QString("<link rel=\"stylesheet\" href=\"assets/css/bootstrap.min.css\">");
+    *htextStream << QString("<script src=\"assets/js/bootstrap.bundle.min.js\"></script>");
 
     //-- Cross browser support for SVG icon sprites --
     *htextStream << QString("<script src=\"assets/js/svg4everybody.min.js\"></script>");
@@ -1110,6 +1110,7 @@ void QsnWebContainer::getAuthorizationHtml(QString , QByteArray *content)
                             "<meta name=\"description\" content=\"\">"
                             "<meta name=\"author\" content=\"Stanislav Tumanov - signalnet.ru\">"
                             "<link href=\"assets/css/iot-theme-bundle.min.css\" rel=\"stylesheet\">"
+                            "<link href=\"assets/css/bootstrap.min.css\" rel=\"stylesheet\">"
                             "</head><body>");
 
 
@@ -1140,6 +1141,7 @@ void QsnWebContainer::getAuthorizationHtml(QString , QByteArray *content)
     *htextStream << QString("</div></div></form></div></div></div></div>");
 
     *htextStream << QString("<script src=\"assets/js/jquery-3.4.1.min.js\"></script>");
+    *htextStream << QString("<link rel=\"stylesheet\" href=\"assets/css/bootstrap.min.css\">");
     *htextStream << QString("<script src=\"assets/js/bootstrap.bundle.min.js\"></script>");
 
     //auth script

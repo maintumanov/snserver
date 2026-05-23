@@ -1,0 +1,77 @@
+
+ service mode
+
+ command 0: connect/disconnect
+    signal:
+       0 - connect
+       1 - disconnect
+
+ command 1: connected/disconnected
+    signal:
+       0 - connected
+       1 - disconnected
+
+ command 2: time seconds event
+
+ command 3: message
+    signal: level
+    data: text
+
+ command 4: intialization modules delay
+
+ command 5: update properties
+	info: key
+	data: vol
+
+command 6: SN address change
+
+ command 8: alert
+    signal:
+       0 - cancel
+
+ command 9: security
+    signal:
+       0 - cancel
+       1 - arming
+       2 - arming secretly
+       3 - disarming
+
+ command 10: account update
+    signal:
+       0 - update
+
+ command 11: mqtt
+    signal:
+       0 - read/write
+       1 - request
+	info: topic
+	data: msg
+
+ command 255: log
+    signal: level
+       0 - error
+       1 - warning
+       2 - information
+    info: message
+    data: name (device or log name)
+    Address :
+       0 - no display view
+       1 - display view
+
+==============================================
+
+ +command ?: not night / Night
+    signal:
+       0 - not night
+       1 - night
+
+ +command ?: not day / day
+    signal:
+       0 - not day 
+       1 - day
+
+ +command ?: presence/absence
+    signal:
+       0 - presence
+       1 - absence
+

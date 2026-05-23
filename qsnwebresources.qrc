@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>favicon.ico</file>
+        <file>manifest.json</file>
+        <file>sw.js</file>
+    </qresource>
+</RCC>

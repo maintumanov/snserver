@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/css/iot-theme-bundle.min.css</file>
+        <file>assets/js/bootstrap.bundle.min.js</file>
+        <file>assets/js/iot-functions.min.js</file>
+        <file>assets/js/iot-timer.min.js</file>
+        <file>assets/js/svg4everybody.min.js</file>
+        <file>assets/js/jquery-3.4.1.min.js</file>
+        <file>assets/images/icons-items.svg</file>
+        <file>assets/css/apexcharts.css</file>
+        <file>assets/js/apexcharts.min.js</file>
+        <file>assets/images/icons-sprite.svg</file>
+    </qresource>
+</RCC>

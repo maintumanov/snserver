@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ServerLng_ru_RU.qm</file>
+        <file>ServerLng_ru_RU.ts</file>
+    </qresource>
+</RCC>

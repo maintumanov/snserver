@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sounds/doorbell.wav</file>
+        <file>sounds/nightbell.wav</file>
+    </qresource>
+</RCC>

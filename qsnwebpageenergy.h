@@ -38,6 +38,7 @@ public:
     void getFunctions(QStringList *functions, int accountIndex, QString pageURL = "");
     void getFunctionsJSON(QStringList *fjson, int accountIndex);
     void getContents(QStringList *contents, int accountIndex);
+    void getJavaScript(QStringList *functions, int accountIndex);
     void actionItem(QString URL, QMap<QString, QString> *options, QStringList *returnItems, qint64 uid);
     void fromStream(QDataStream *stream);
     void receiveSignalIOIndex(int indexIO, QByteArray *data);

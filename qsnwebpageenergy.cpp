@@ -103,7 +103,7 @@ void QsnWebPageEnergy::getContents(QStringList *contents, int ) {
     *contents << QsnBsFormTableTheadAdd(tr("Consumption"));
     *contents << QsnBsFormTableTheadEnd();
     *contents << QsnBsFormTableBodyBegin("tabletotal");
-    *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Last hour"), dbName).arg(60).arg(linkOptions()), lastVolue);
+    *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Last hour"), dbName).arg(60).arg(linkOptions()), lastValue);
     *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Per day"), dbName).arg(1440).arg(linkOptions()), lastDay);
     *contents << QsnBsFormTableBodyRowAdd(QString("<a href='/graph?name=%2&minutes=%3%4'>%1</a>").arg(tr("Per month"), dbName).arg(43200).arg(linkOptions()), lastMonth);
     *contents << QsnBsFormTableBodyEnd();
